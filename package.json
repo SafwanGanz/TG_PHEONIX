@@ -1,0 +1,23 @@
+{
+  "name": "pheonix_bot",
+  "description": "telegram group management bot",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SafwanGanz/TG_PHEONIX.git"
+  },
+  "keywords": ["telegram", "bot", "telegram_bot", "telegram bot"],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SafwanGanz/TG_PHEONIX/issues"
+  },
+  "homepage": "https://github.com/SafwanGanz/TG_PHEONIX.git",
+  "dependencies": {
+    "telegraf": "^4.12.2"
+  }
+}
