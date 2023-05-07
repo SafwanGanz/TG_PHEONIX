@@ -9,7 +9,7 @@ const bot = new Telegraf(bot_token);
 bot.use(useNewReplies())
 
 bot.command('start', async(ctx) => {
-        ctx.reply(`Hi 👋\n\nI am an AI Robot to answer your question, Please send your Question, later your answer will be answered by the robot.\n\n_AI (Artificial Intelligence) is a technology that uses complex algorithms to create machines that can think and act like man. AI can be used to solve complex problems and make more informed decisions than humans. AI can also be used to analyze data and make decisions based on it. AI can also be used to increase productivity and efficiency, as well as assist humans in completing complex tasks._\n\n_This bot is limited to a maximum of 0 words_\n\n*Created by @ajmal_x0*`)
+        ctx.reply(`Hi 👋\n\nI am an AI Robot to answer your question, Please send your Question, later your answer will be answered by the robot.\n\n_AI (Artificial Intelligence) is a technology that uses complex algorithms to create machines that can think and act like man. AI can be used to solve complex problems and make more informed decisions than humans. AI can also be used to analyze data and make decisions based on it. AI can also be used to increase productivity and efficiency, as well as assist humans in completing complex tasks._\n\n_This bot is limited to a maximum of 0 words_\n\n*Created by SafwanGanz*`)
 })
 bot.help((ctx) => ctx.reply('Send me a sticker'));
 bot.on(message('sticker'), (ctx) => ctx.reply('👍'));
