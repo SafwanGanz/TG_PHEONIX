@@ -11,7 +11,7 @@
     "url": "https://github.com/SafwanGanz/TG_PHEONIX.git"
   },
   "keywords": ["telegram", "bot", "telegram_bot", "telegram bot"],
-  "author": "SafwanGanz",
+  "author": "",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/SafwanGanz/TG_PHEONIX/issues"
@@ -19,6 +19,8 @@
   "homepage": "https://github.com/SafwanGanz/TG_PHEONIX.git",
   "dependencies": {
     "telegraf": "^4.12.2",
-    "mongoose": "^7.1.0"
+    "mongoose": "7.1.0",
+    "chalk": "^5.2.0",
+    "os": "^0.1.2"
   }
 }
