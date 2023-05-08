@@ -1,7 +1,7 @@
-const { Telegraf, Telegram } = require('telegraf');
-const { message } = require('telegraf/filters');
-const fs = require('fs')
-const { useNewReplies } = require("telegraf/future")
+import { Telegraf, Telegram } from 'telegraf'
+import { message } from 'telegraf/filters'
+import fs from 'fs'
+import { useNewReplies } from "telegraf/future"
 const {
     bot_token
 } = JSON.parse(fs.readFileSync('./config.json'))
