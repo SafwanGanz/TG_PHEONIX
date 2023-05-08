@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/SafwanGanz/TG_PHEONIX.git",
   "dependencies": {
-    "telegraf": "^4.12.2"
+    "telegraf": "^4.12.2",
+    "mongoose": "^7.1.0"
   }
 }
