@@ -59,5 +59,6 @@ npm start
 
 - SafwanGanz
 - Ajmal-x0
-- neeraj-x0
+- Neeraj-x0
 - AlbinThomas
+- Abin.code
