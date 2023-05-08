@@ -42,7 +42,7 @@ process.once('SIGTERM', () => bot.stop('SIGTERM'))
 //Functions ------------------------------------
 
 
-export async function getArgs(ctx) {
+ async function getArgs(ctx) {
     try {
         var args = ctx.message.text
         args = args.split(" ")
@@ -51,7 +51,7 @@ export async function getArgs(ctx) {
     } catch { return [] }
 }
 
-export function getUser(ctx) {
+ function getUser(ctx) {
     try {
         var user = ctx
         var last_name = user["last_name"] || ""
@@ -61,7 +61,7 @@ export function getUser(ctx) {
     } catch (e) { throw e }
 }
 
-export async function getBot(ctx) {
+ async function getBot(ctx) {
     try {
         var bot = ctx.botInfo
         var last_name = bot["last_name"] || ""
@@ -71,7 +71,7 @@ export async function getBot(ctx) {
     } catch { return {} }
 }
 
-export async function getLink(file_id) { 
+ async function getLink(file_id) { 
     try { 
         return (await bot.telegram.getFileLink(file_id)).href
     } catch {
@@ -79,7 +79,7 @@ export async function getLink(file_id) {
     } 
 }
 
-export async function getPhotoProfile(id) {
+ async function getPhotoProfile(id) {
     try {
         var url_default = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
         if (String(id).startsWith("-100")) {
@@ -91,6 +91,6 @@ export async function getPhotoProfile(id) {
             if (pp.total_count == 0) return url_default
             var file_id = pp.photos[0][2].file_id
         }
-        return await this.getLink(file_id)
+        return await getLink(file_id)
     } catch (e) { throw e }
 }
