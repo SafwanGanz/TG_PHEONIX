@@ -12,6 +12,9 @@ const {
     bot_prefix,
     openAi_key
 } = JSON.parse(readFileSync('./config.json'))
+if (openAi_key == "") {
+    console.log(chalk.redBright("Pleas Add openAi_key in config.json"))
+}
 if (bot_token == "") {
     console.log(chalk.redBright('Pleas Add Your Bot token in config.json'))
 }
