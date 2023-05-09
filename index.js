@@ -3,7 +3,7 @@ import { message } from 'telegraf/filters';
 import { readFileSync } from 'fs';
 import cp from 'child_process'
 import google from 'google-it'
-import insta from './lib/js/insta.js'
+import insta from './api/insta.js'
 import { promisify } from 'util'
 import chalk from 'chalk';
 import fs from 'fs'
