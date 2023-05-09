@@ -5,10 +5,12 @@ import cp from 'child_process'
 import { promisify } from 'util'
 import chalk from 'chalk';
 import fs from 'fs'
+import { Configuration, OpenAIApi } from "openai";
 import { useNewReplies } from "telegraf/future";
 const {
     bot_token,
-    bot_prefix
+    bot_prefix,
+    openAi_key
 } = JSON.parse(readFileSync('./config.json'))
 if (bot_token == "") {
     console.log(chalk.redBright('Pleas Add Your Bot token in config.json'))
@@ -106,11 +108,30 @@ bot.on("message", async (ctx) => {
             break
         case 'gpt':
         case 'bot':
-            if (chat.gpt === true) {
-
-            } else {
-                ctx.reply('pleas turn on chatbot mod\n/on chatbot')
+            if (args.length == 0){
+                ctx.reply('Pleas Enter query')
             }
+            var txt = args[0]
+            const configuration = new Configuration({
+                apiKey: openAi_key,
+            });
+            const openai = new OpenAIApi(configuration);
+            try {
+                const response = await openai.createCompletion({
+                    model: "text-davinci-003",
+                    prompt: txt,
+                    temperature: 0.9,
+                    max_tokens: 4000,
+                    top_p: 1.0,
+                    frequency_penalty: 0.0,
+                    presence_penalty: 0.0,
+                });
+                ctx.reply(`${response.data.choices[0].text}`.trim())
+            } catch (err) {
+                console.log(err)
+                ctx.reply('Error')
+            }
+            break
 
     }
 
