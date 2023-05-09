@@ -1,12 +1,18 @@
 import { Telegraf, Telegram } from 'telegraf';
 import { message } from 'telegraf/filters';
 import { readFileSync } from 'fs';
+import cp from 'child_process'
+import { promisify } from 'util'
 import chalk from 'chalk';
+import fs from 'fs'
 import { useNewReplies } from "telegraf/future";
 const {
     bot_token,
     bot_prefix
 } = JSON.parse(readFileSync('./config.json'))
+if (bot_token == "") {
+    console.log(chalk.redBright('Pleas Add Your Bot token in config.json'))
+}
 const bot = new Telegraf(bot_token);
 bot.use(useNewReplies())
 bot.telegram.setMyCommands([
@@ -18,10 +24,10 @@ bot.on("new_chat_members", async (ctx) => {
     var message = ctx.message
     var groupname = message.chat.title
     for (const x of message.new_chat_members) {
-    var pp_user = await getPhotoProfile(x.id)
-    var full_name = getUser(x).full_name
-    console.log(chalk.whiteBright("├"), chalk.cyanBright("[  JOINS  ]"), chalk.whiteBright(full_name), chalk.greenBright("join in"), chalk.whiteBright(groupname))
-    ctx.replyWithPhoto(pp_user, { caption: `Hai ${full_name}!! Welcome To ${groupname}` })
+        var pp_user = await getPhotoProfile(x.id)
+        var full_name = getUser(x).full_name
+        console.log(chalk.whiteBright("├"), chalk.cyanBright("[  JOINS  ]"), chalk.whiteBright(full_name), chalk.greenBright("join in"), chalk.whiteBright(groupname))
+        ctx.replyWithPhoto(pp_user, { caption: `Hai ${full_name}!! Welcome To ${groupname}` })
     }
 })
 
@@ -34,7 +40,15 @@ bot.on("left_chat_member", async (ctx) => {
 })
 
 bot.command('start', async (ctx) => {
-    ctx.reply(`Hi 👋\n\nI am an AI Robot to answer your question, Please send your Question, later your answer will be answered by the robot.\n\n_AI (Artificial Intelligence) is a technology that uses complex algorithms to create machines that can think and act like man. AI can be used to solve complex problems and make more informed decisions than humans. AI can also be used to analyze data and make decisions based on it. AI can also be used to increase productivity and efficiency, as well as assist humans in completing complex tasks._\n\n_This bot is limited to a maximum of 0 words_\n\n*Created by @ajmal_x*`)
+    var name = ctx.first_name
+    ctx.reply(`
+ʜᴇy ${name}!..
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❏ ᴛʜɪꜱ ɪꜱ ᴀ ɢʀᴏᴜᴩ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ᴀɪ ʙᴏᴛ
+❏ ᴀʟᴏɴɢ ᴡɪᴛʜ ᴛʜᴇ ʙᴀꜱɪᴄ ꜰᴇᴀᴛᴜʀᴇꜱ, ɪᴛ ᴀʟꜱᴏ ɪɴᴄʟᴜᴅᴇꜱ ꜱᴏᴍᴇ ɪɴᴛᴇʀᴇꜱᴛɪɴɢ ꜰᴇᴀᴛᴜʀᴇꜱ
+`)
 })
 bot.on("message", async (ctx) => {
     const body = ctx.message.text || ctx.message.caption || ""
@@ -47,10 +61,57 @@ bot.on("message", async (ctx) => {
     const command = comm
     const args = await getArgs(ctx)
     const user = getUser(ctx.message.from)
-    switch(command){
+    const isCmd = cmd
+    const isGroup = ctx.chat.type.includes("group")
+    const groupName = isGroup ? ctx.chat.title : ""
+
+    const isImage = ctx.message.hasOwnProperty("photo")
+    const isVideo = ctx.message.hasOwnProperty("video")
+    const isAudio = ctx.message.hasOwnProperty("audio")
+    const isSticker = ctx.message.hasOwnProperty("sticker")
+    const isContact = ctx.message.hasOwnProperty("contact")
+    const isLocation = ctx.message.hasOwnProperty("location")
+    const isDocument = ctx.message.hasOwnProperty("document")
+    const isAnimation = ctx.message.hasOwnProperty("animation")
+    const isMedia = isImage || isVideo || isAudio || isSticker || isContact || isLocation || isDocument || isAnimation
+
+    const quotedMessage = ctx.message.reply_to_message || {}
+    const isQuotedImage = quotedMessage.hasOwnProperty("photo")
+    const isQuotedVideo = quotedMessage.hasOwnProperty("video")
+    const isQuotedAudio = quotedMessage.hasOwnProperty("audio")
+    const isQuotedSticker = quotedMessage.hasOwnProperty("sticker")
+    const isQuotedContact = quotedMessage.hasOwnProperty("contact")
+    const isQuotedLocation = quotedMessage.hasOwnProperty("location")
+    const isQuotedDocument = quotedMessage.hasOwnProperty("document")
+    const isQuotedAnimation = quotedMessage.hasOwnProperty("animation")
+    const isQuoted = ctx.message.hasOwnProperty("reply_to_message")
+
+    var typeMessage = body.substr(0, 50).replace(/\n/g, '')
+    if (isImage) typeMessage = "Image"
+    else if (isVideo) typeMessage = "Video"
+    else if (isAudio) typeMessage = "Audio"
+    else if (isSticker) typeMessage = "Sticker"
+    else if (isContact) typeMessage = "Contact"
+    else if (isLocation) typeMessage = "Location"
+    else if (isDocument) typeMessage = "Document"
+    else if (isAnimation) typeMessage = "Animation"
+
+    logFunction(isGroup, isCmd, typeMessage, user, groupName);
+    var file_id = ""
+    file_id = newFunction(isQuoted, file_id, isQuotedImage, isQuotedVideo, isQuotedAudio, isQuotedDocument, isQuotedAnimation);
+    var mediaLink = file_id != "" ? await tele.getLink(file_id) : ""
+    switch (command) {
         case 'help':
-            ctx.reply('hi')
+            ctx.reply('Adding basic features!...')
             break
+        case 'gpt':
+        case 'bot':
+            if (chat.gpt === true) {
+
+            } else {
+                ctx.reply('pleas turn on chatbot mod\n/on chatbot')
+            }
+
     }
 
 })
@@ -61,8 +122,30 @@ process.once('SIGTERM', () => bot.stop('SIGTERM'))
 
 //Functions ------------------------------------
 
+function logFunction(isGroup, isCmd, typeMessage, user, groupName) {
+    if (!isGroup && !isCmd)
+        console.log(chalk.whiteBright("├"), chalk.cyanBright("[ PRIVATE ]"), chalk.whiteBright(typeMessage), chalk.greenBright("from"), chalk.whiteBright(user.full_name));
+    if (isGroup && !isCmd)
+        console.log(chalk.whiteBright("├"), chalk.cyanBright("[  GROUP  ]"), chalk.whiteBright(typeMessage), chalk.greenBright("from"), chalk.whiteBright(user.full_name), chalk.greenBright("in"), chalk.whiteBright(groupName));
+    if (!isGroup && isCmd)
+        console.log(chalk.whiteBright("├"), chalk.cyanBright("[ COMMAND ]"), chalk.whiteBright(typeMessage), chalk.greenBright("from"), chalk.whiteBright(user.full_name));
+    if (isGroup && isCmd)
+        console.log(chalk.whiteBright("├"), chalk.cyanBright("[ COMMAND ]"), chalk.whiteBright(typeMessage), chalk.greenBright("from"), chalk.whiteBright(user.full_name), chalk.greenBright("in"), chalk.whiteBright(groupName));
+}
 
- async function getArgs(ctx) {
+
+function newFunction(isQuoted, file_id, isQuotedImage, isQuotedVideo, isQuotedAudio, isQuotedDocument, isQuotedAnimation) {
+    if (isQuoted) {
+        file_id = isQuotedImage ? ctx.message.reply_to_message.photo[ctx.message.reply_to_message.photo.length - 1].file_id :
+            isQuotedVideo ? ctx.message.reply_to_message.video.file_id :
+                isQuotedAudio ? ctx.message.reply_to_message.audio.file_id :
+                    isQuotedDocument ? ctx.message.reply_to_message.document.file_id :
+                        isQuotedAnimation ? ctx.message.reply_to_message.animation.file_id : "";
+    }
+    return file_id;
+}
+
+async function getArgs(ctx) {
     try {
         var args = ctx.message.text
         args = args.split(" ")
@@ -71,7 +154,7 @@ process.once('SIGTERM', () => bot.stop('SIGTERM'))
     } catch { return [] }
 }
 
- function getUser(ctx) {
+function getUser(ctx) {
     try {
         var user = ctx
         var last_name = user["last_name"] || ""
@@ -81,7 +164,7 @@ process.once('SIGTERM', () => bot.stop('SIGTERM'))
     } catch (e) { throw e }
 }
 
- async function getBot(ctx) {
+async function getBot(ctx) {
     try {
         var bot = ctx.botInfo
         var last_name = bot["last_name"] || ""
@@ -91,15 +174,15 @@ process.once('SIGTERM', () => bot.stop('SIGTERM'))
     } catch { return {} }
 }
 
- async function getLink(file_id) { 
-    try { 
+async function getLink(file_id) {
+    try {
         return (await bot.telegram.getFileLink(file_id)).href
     } catch {
-        throw "Error while get url" 
-    } 
+        throw "Error while get url"
+    }
 }
 
- async function getPhotoProfile(id) {
+async function getPhotoProfile(id) {
     try {
         var url_default = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
         if (String(id).startsWith("-100")) {
