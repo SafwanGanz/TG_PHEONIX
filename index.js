@@ -4,7 +4,8 @@ import { readFileSync } from 'fs';
 import chalk from 'chalk';
 import { useNewReplies } from "telegraf/future";
 const {
-    bot_token
+    bot_token,
+    bot_prefix
 } = JSON.parse(readFileSync('./config.json'))
 const bot = new Telegraf(bot_token);
 bot.use(useNewReplies())
