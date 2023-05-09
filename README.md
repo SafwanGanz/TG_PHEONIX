@@ -25,6 +25,7 @@ apt-get install nodejs
 apt-get install npm
 apt-get install ffmpeg
 apt-get install git
+git clone https://github.com/SafwanGanz/TG_PHEONIX # clone the repo.
 cd TG_PHEONIX # (After Cloning and open TG_PHEONIX Repo)
 nano config.json # (Make Sure uh have Filled Your Vars in config.json)
 npm install
