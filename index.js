@@ -158,9 +158,9 @@ bot.on("message", async (ctx) => {
                 ctx.reply('Pleas Enter Url')
             }
             let vid_url = args[0]
-            await insta(vid_url)
-                .then(buffer => {
-                    ctx.reply(buffer)
+           .then(res => {
+                 ctx.replyWithMediaGroup(res.ur_list, {caption: 'INSTAGRAM DOWNLOADER'})
+                })
                 })
             break
         case 'google':
