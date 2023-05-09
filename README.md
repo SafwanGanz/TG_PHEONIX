@@ -26,7 +26,7 @@ apt-get install npm
 apt-get install ffmpeg
 apt-get install git
 cd TG_PHEONIX # (After Cloning and open TG_PHEONIX Repo)
-nano config.json (Make Sure uh have Filled Your Vars in config.json)
+nano config.json # (Make Sure uh have Filled Your Vars in config.json)
 npm install
 npm start
 ```
@@ -38,7 +38,7 @@ apt update && upgrade
 pkg install git
 git clone https://github.com/SafwanGanz/TG_PHEONIX # clone the repo.
 cd TG_PHEONIX # (After Cloning and open TG_PHEONIX Repo)
-nano config.json (Make Sure uh have Filled Your Vars in config.json)
+nano config.json # (Make Sure uh have Filled Your Vars in config.json)
 bash install.sh
 npm start
 ```
