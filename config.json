@@ -1,5 +1,6 @@
 {
     "bot_token": "",
     "bot_prefix": "/",
+    "openAi_key": "",
     "mongo_url": ""
 }
