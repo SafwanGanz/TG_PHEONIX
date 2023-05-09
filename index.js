@@ -161,7 +161,6 @@ bot.on("message", async (ctx) => {
            .then(res => {
                  ctx.replyWithMediaGroup(res.ur_list, {caption: 'INSTAGRAM DOWNLOADER'})
                 })
-                })
             break
         case 'google':
         case 'g':
