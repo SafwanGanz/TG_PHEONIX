@@ -109,6 +109,21 @@ bot.on("message", async (ctx) => {
         case 'help':
             ctx.reply('Adding basic features!...')
             break
+            case 'speed':
+        case 'ping':
+            let exec = promisify(cp.exec).bind(cp)
+            ctx.reply(`_Testing speed-test..._`)
+            let o
+            try {
+                o = await exec('python3 speed.py')
+            } catch (e) {
+                o = e
+            } finally {
+                let { stdout, stderr } = o
+                if (stdout.trim()) ctx.reply(stdout)
+                if (stderr.trim()) ctx.reply(stderr)
+            }
+            break
         case 'gpt':
         case 'bot':
             if (args.length == 0){
