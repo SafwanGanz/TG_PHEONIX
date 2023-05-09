@@ -58,7 +58,7 @@ npm start
 <p align="center"> 𝐓𝐡𝐚𝐧𝐤𝐬 ----> </p>
 
 - SafwanGanz
-- Ajmal-x0
+- Ajmal-Achu
 - Neeraj-x0
 - AlbinThomas
 - Abin.code
