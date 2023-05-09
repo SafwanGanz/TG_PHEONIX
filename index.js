@@ -2,6 +2,8 @@ import { Telegraf, Telegram } from 'telegraf';
 import { message } from 'telegraf/filters';
 import { readFileSync } from 'fs';
 import cp from 'child_process'
+import google from 'google-it'
+import insta from './lib/js/insta.js'
 import { promisify } from 'util'
 import chalk from 'chalk';
 import fs from 'fs'
@@ -148,6 +150,37 @@ bot.on("message", async (ctx) => {
             } catch (err) {
                 console.log(err)
                 ctx.reply('Error')
+            }
+            break
+        case 'insta':
+        case 'ig':
+            if (args.length == 0) {
+                ctx.reply('Pleas Enter Url')
+            }
+            let vid_url = args[0]
+            await insta(vid_url)
+                .then(buffer => {
+                    ctx.reply(buffer)
+                })
+            break
+        case 'google':
+        case 'g':
+            if (args.length == 0) {
+                ctx.reply('Pleas Enter Query')
+            }
+            let googlee = args[0]
+            try {
+                google({ 'query': googlee }).then(res => {
+                    let teks = `Google Search From : ${googlee}\n\n`
+                    for (let g of res) {
+                        teks += `▢ Title : ${g.title}\n`
+                        teks += `▢ Description : ${g.snippet}\n`
+                        teks += `▢ Link : ${g.link}\n\n────────────────────────\n\n`
+                    }
+                    ctx.reply(teks)
+                })
+            } catch (e) {
+                ctx.reply(`404 ERROR!\nServer Busy`)
             }
             break
 
