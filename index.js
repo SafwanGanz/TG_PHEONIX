@@ -117,7 +117,7 @@ bot.on("message", async (ctx) => {
             ctx.reply(`_Testing speed-test..._`)
             let o
             try {
-                o = await exec('python3 speed.py')
+                o = await exec('cd plugins; python3 speed.py')
             } catch (e) {
                 o = e
             } finally {
