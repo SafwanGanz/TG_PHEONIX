@@ -12,7 +12,12 @@
     "type": "git",
     "url": "https://github.com/SafwanGanz/TG_PHEONIX.git"
   },
-  "keywords": ["telegram", "bot", "telegram_bot", "telegram bot"],
+  "keywords": [
+    "telegram",
+    "bot",
+    "telegram_bot",
+    "telegram bot"
+  ],
   "author": "",
   "license": "MIT",
   "bugs": {
@@ -20,13 +25,14 @@
   },
   "homepage": "https://github.com/SafwanGanz/TG_PHEONIX.git",
   "dependencies": {
-    "telegraf": "^4.12.2",
-    "mongoose": "7.1.0",
+    "axios": "^1.4.0",
     "chalk": "^5.2.0",
-    "openai": "3.2.1",
     "child_process": "1.0.2",
-    "util": "0.12.5",
+    "google-it": "1.6.4",
     "instagram-url-direct": "1.0.13",
-    "google-it": "1.6.4"
+    "mongoose": "7.1.0",
+    "openai": "3.2.1",
+    "telegraf": "^4.12.2",
+    "util": "0.12.5"
   }
 }
