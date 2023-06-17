@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/SafwanGanz/TG_PHEONIX.git",
   "dependencies": {
+    "wb-bot": "github:WhiskeySockets/Baileys",
     "axios": "^1.4.0",
     "chalk": "^5.2.0",
     "child_process": "1.0.2",
