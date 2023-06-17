@@ -1,6 +1,6 @@
 {
-    "bot_token": "6154961284:AAEBVcEf1EKzOmSHUM3yqhCCpzyxqWoVxtk",
+    "bot_token": "",
     "bot_prefix": "/",
-    "openAi_key": "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",
-    "mongo_url": "mongodb+srv://tg:tg@cluster0.tbvyutv.mongodb.net/?retryWrites=true&w=majority"
+    "openAi_key": "",
+    "mongo_url": ""
 }
